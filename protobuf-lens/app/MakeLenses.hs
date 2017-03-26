@@ -13,6 +13,8 @@ import GHC.Word (Word32)
 import qualified Network.Riak.Protocol.AuthRequest
 import qualified Network.Riak.Protocol.BucketKeyPreflistItem
 import qualified Network.Riak.Protocol.BucketProps
+import qualified Network.Riak.Protocol.CSBucketRequest
+import qualified Network.Riak.Protocol.CSBucketResponse
 import qualified Network.Riak.Protocol.CommitHook
 import qualified Network.Riak.Protocol.Content
 import qualified Network.Riak.Protocol.CounterGetRequest
@@ -20,8 +22,6 @@ import qualified Network.Riak.Protocol.CounterGetResponse
 import qualified Network.Riak.Protocol.CounterOp
 import qualified Network.Riak.Protocol.CounterUpdateRequest
 import qualified Network.Riak.Protocol.CounterUpdateResponse
-import qualified Network.Riak.Protocol.CSBucketRequest
-import qualified Network.Riak.Protocol.CSBucketResponse
 import qualified Network.Riak.Protocol.DeleteRequest
 import qualified Network.Riak.Protocol.DtFetchRequest
 import qualified Network.Riak.Protocol.DtFetchResponse
@@ -70,6 +70,25 @@ import qualified Network.Riak.Protocol.SetBucketRequest
 import qualified Network.Riak.Protocol.SetBucketTypeRequest
 import qualified Network.Riak.Protocol.SetClientIDRequest
 import qualified Network.Riak.Protocol.SetOp
+import qualified Network.Riak.Protocol.TsCell
+import qualified Network.Riak.Protocol.TsColumnDescription
+import qualified Network.Riak.Protocol.TsColumnType
+import qualified Network.Riak.Protocol.TsCoverageEntry
+import qualified Network.Riak.Protocol.TsCoverageRequest
+import qualified Network.Riak.Protocol.TsCoverageResponse
+import qualified Network.Riak.Protocol.TsDeleteRequest
+import qualified Network.Riak.Protocol.TsDeleteResponse
+import qualified Network.Riak.Protocol.TsGetRequest
+import qualified Network.Riak.Protocol.TsGetResponse
+import qualified Network.Riak.Protocol.TsInterpolation
+import qualified Network.Riak.Protocol.TsListKeysRequest
+import qualified Network.Riak.Protocol.TsListKeysResponse
+import qualified Network.Riak.Protocol.TsPutRequest
+import qualified Network.Riak.Protocol.TsPutResponse
+import qualified Network.Riak.Protocol.TsQueryRequest
+import qualified Network.Riak.Protocol.TsQueryResponse
+import qualified Network.Riak.Protocol.TsRange
+import qualified Network.Riak.Protocol.TsRow
 import qualified Network.Riak.Protocol.YzIndex
 import qualified Network.Riak.Protocol.YzIndexDeleteRequest
 import qualified Network.Riak.Protocol.YzIndexGetRequest
@@ -83,6 +102,8 @@ main = pure ()
 makeLenses ''Network.Riak.Protocol.AuthRequest.AuthRequest
 makeLenses ''Network.Riak.Protocol.BucketKeyPreflistItem.BucketKeyPreflistItem
 makeLenses ''Network.Riak.Protocol.BucketProps.BucketProps
+makeLenses ''Network.Riak.Protocol.CSBucketRequest.CSBucketRequest
+makeLenses ''Network.Riak.Protocol.CSBucketResponse.CSBucketResponse
 makeLenses ''Network.Riak.Protocol.CommitHook.CommitHook
 makeLenses ''Network.Riak.Protocol.Content.Content
 makeLenses ''Network.Riak.Protocol.CounterGetRequest.CounterGetRequest
@@ -90,8 +111,6 @@ makeLenses ''Network.Riak.Protocol.CounterGetResponse.CounterGetResponse
 makeLenses ''Network.Riak.Protocol.CounterOp.CounterOp
 makeLenses ''Network.Riak.Protocol.CounterUpdateRequest.CounterUpdateRequest
 makeLenses ''Network.Riak.Protocol.CounterUpdateResponse.CounterUpdateResponse
-makeLenses ''Network.Riak.Protocol.CSBucketRequest.CSBucketRequest
-makeLenses ''Network.Riak.Protocol.CSBucketResponse.CSBucketResponse
 makeLenses ''Network.Riak.Protocol.DeleteRequest.DeleteRequest
 makeLenses ''Network.Riak.Protocol.DtFetchRequest.DtFetchRequest
 makeLenses ''Network.Riak.Protocol.DtFetchResponse.DtFetchResponse
@@ -140,6 +159,25 @@ makeLenses ''Network.Riak.Protocol.SetBucketRequest.SetBucketRequest
 makeLenses ''Network.Riak.Protocol.SetBucketTypeRequest.SetBucketTypeRequest
 makeLenses ''Network.Riak.Protocol.SetClientIDRequest.SetClientIDRequest
 makeLenses ''Network.Riak.Protocol.SetOp.SetOp
+makeLenses ''Network.Riak.Protocol.TsCell.TsCell
+makeLenses ''Network.Riak.Protocol.TsColumnDescription.TsColumnDescription
+makeLenses ''Network.Riak.Protocol.TsColumnType.TsColumnType
+makeLenses ''Network.Riak.Protocol.TsCoverageEntry.TsCoverageEntry
+makeLenses ''Network.Riak.Protocol.TsCoverageRequest.TsCoverageRequest
+makeLenses ''Network.Riak.Protocol.TsCoverageResponse.TsCoverageResponse
+makeLenses ''Network.Riak.Protocol.TsDeleteRequest.TsDeleteRequest
+makeLenses ''Network.Riak.Protocol.TsDeleteResponse.TsDeleteResponse
+makeLenses ''Network.Riak.Protocol.TsGetRequest.TsGetRequest
+makeLenses ''Network.Riak.Protocol.TsGetResponse.TsGetResponse
+makeLenses ''Network.Riak.Protocol.TsInterpolation.TsInterpolation
+makeLenses ''Network.Riak.Protocol.TsListKeysRequest.TsListKeysRequest
+makeLenses ''Network.Riak.Protocol.TsListKeysResponse.TsListKeysResponse
+makeLenses ''Network.Riak.Protocol.TsPutRequest.TsPutRequest
+makeLenses ''Network.Riak.Protocol.TsPutResponse.TsPutResponse
+makeLenses ''Network.Riak.Protocol.TsQueryRequest.TsQueryRequest
+makeLenses ''Network.Riak.Protocol.TsQueryResponse.TsQueryResponse
+makeLenses ''Network.Riak.Protocol.TsRange.TsRange
+makeLenses ''Network.Riak.Protocol.TsRow.TsRow
 makeLenses ''Network.Riak.Protocol.YzIndex.YzIndex
 makeLenses ''Network.Riak.Protocol.YzIndexDeleteRequest.YzIndexDeleteRequest
 makeLenses ''Network.Riak.Protocol.YzIndexGetRequest.YzIndexGetRequest
