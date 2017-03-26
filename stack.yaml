@@ -1,9 +1,6 @@
-resolver: lts-7.19
+resolver: lts-8.5
 packages:
 - '.'
 - protobuf/
 - protobuf-lens/
-extra-deps:
-- yaml-0.8.21.1
-- aeson-1.1.0.0
-
+extra-deps: []
