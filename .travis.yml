@@ -14,9 +14,9 @@ before_install:
   # riak
   - travis_retry curl -s https://packagecloud.io/install/repositories/basho/riak-ts/script.deb.sh | sudo bash
   - sudo apt-get install riak-ts=1.5.2-1
-  - sed -r --in-place -e 's/^(search) = .*/\1 = on/' /etc/riak/riak.conf
-  - riak start
-  - riak ping
+  - sudo sed -r --in-place -e 's/^(search) = .*/\1 = on/' /etc/riak/riak.conf
+  - sudo riak start
+  - sudo riak ping
   - cd -
 
 matrix:
