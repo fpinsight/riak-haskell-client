@@ -1,6 +1,14 @@
-resolver: lts-8.5
+resolver: lts-8.10
 packages:
 - '.'
 - protobuf/
 - protobuf-lens/
 extra-deps: []
+
+docker:
+  enable: false
+  auto-pull: true
+  repo: "fpinsight/stack-build"
+  run-args:
+    - "--network=riakhaskellclient_default"
+    - "--link=riakhaskellclient_coordinator_1:riakts"
