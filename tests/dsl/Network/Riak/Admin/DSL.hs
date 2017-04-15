@@ -35,16 +35,16 @@ type ServiceName = String
 -- | riak-admin wait-for-service
 waitForService :: ServiceName -> Maybe NodeName -> RiakAdmin
 waitForService name node =
-  "riak-admin wait-for-service " ++ name ++ maybe "" (" " ++) node
+  "sudo riak-admin wait-for-service " ++ name ++ maybe "" (" " ++) node
 
 -- | riak-admin bucket-type create
 bucketTypeCreate :: BucketTypeName -> Maybe BucketProps -> RiakAdmin
 bucketTypeCreate name props =
-  "riak-admin bucket-type create " ++ name ++ maybe "" (" " ++) props
+  "sudo riak-admin bucket-type create " ++ name ++ maybe "" (" " ++) props
 
 -- | riak-admin bucket-type activate
 bucketTypeActivate :: BucketTypeName -> RiakAdmin
-bucketTypeActivate name = "riak-admin bucket-type activate " ++ name
+bucketTypeActivate name = "sudo riak-admin bucket-type activate " ++ name
 
 
 -- | Run a list of riak-admin commands locally, and throw an exception if any of
