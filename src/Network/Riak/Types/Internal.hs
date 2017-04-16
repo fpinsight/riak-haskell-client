@@ -253,6 +253,21 @@ data MessageTag = ErrorResponse
                 | YokozunaIndexGetResponse
                 | YokozunaIndexPutRequest
                 | YokozunaIndexDeleteRequest
+                | TsQueryRequest
+                | TsQueryResponse
+                | TsPutRequest
+                | TsPutResponse
+                | TsDeleteRequest
+                | TsDeleteResponse
+                | TsGetRequest
+                | TsGetResponse
+                | TsListKeysRequest
+                | TsListKeysResponse
+                | TsCoverageRequest
+                | TsCoverageResponse
+                | TsCoverageEntry
+                | TsRange
+--                | TsTtbMsg
                   deriving (Eq, Show, Generic)
 
 instance Hashable MessageTag

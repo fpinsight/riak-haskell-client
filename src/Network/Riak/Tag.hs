@@ -59,6 +59,22 @@ import Network.Riak.Protocol.YzIndexGetRequest
 import Network.Riak.Protocol.YzIndexGetResponse
 import Network.Riak.Protocol.YzIndexPutRequest
 import Network.Riak.Protocol.YzIndexDeleteRequest
+import Network.Riak.Protocol.TsQueryRequest
+import Network.Riak.Protocol.TsQueryResponse
+import Network.Riak.Protocol.TsPutRequest
+import Network.Riak.Protocol.TsPutResponse
+import Network.Riak.Protocol.TsDeleteRequest
+import Network.Riak.Protocol.TsDeleteResponse
+import Network.Riak.Protocol.TsGetRequest
+import Network.Riak.Protocol.TsGetResponse
+import Network.Riak.Protocol.TsListKeysRequest
+import Network.Riak.Protocol.TsListKeysResponse
+import Network.Riak.Protocol.TsCoverageRequest
+import Network.Riak.Protocol.TsCoverageResponse
+import Network.Riak.Protocol.TsCoverageEntry
+import Network.Riak.Protocol.TsRange
+-- import Network.Riak.Protocol.TsTtbMsg
+
 import Network.Riak.Types.Internal as Types
 import Text.ProtocolBuffers.Get (Get, getWord8)
 
@@ -326,6 +342,124 @@ instance Tagged YzIndexDeleteRequest where
 instance Request YzIndexDeleteRequest where
     expectedResponse _ = Types.DeleteResponse
 
+-- TsQueryRequest
+instance Tagged TsQueryRequest where
+    messageTag _ = Types.TsQueryRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsQueryRequest where
+    expectedResponse _ = Types.TsQueryResponse
+    {-# INLINE expectedResponse #-}
+
+-- TsQueryResponse
+instance Tagged TsQueryResponse where
+    messageTag _ = Types.TsQueryResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsQueryResponse
+
+instance Exchange TsQueryRequest TsQueryResponse
+
+-- TsPutRequest
+instance Tagged TsPutRequest where
+    messageTag _ = Types.TsPutRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsPutRequest where
+    expectedResponse _ = Types.TsPutRequest
+    {-# INLINE expectedResponse #-}
+
+-- TsPutResponse
+instance Tagged TsPutResponse where
+    messageTag _ = Types.TsPutResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsPutResponse
+
+instance Exchange TsPutRequest TsPutResponse
+
+-- TsDeleteRequest
+instance Tagged TsDeleteRequest where
+    messageTag _ = Types.TsDeleteRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsDeleteRequest where
+    expectedResponse _ = Types.TsDeleteResponse
+    {-# INLINE expectedResponse #-}
+
+-- TsDeleteResponse
+instance Tagged TsDeleteResponse where
+    messageTag _ = Types.TsDeleteResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsDeleteResponse
+
+instance Exchange TsDeleteRequest TsDeleteResponse
+
+-- TsGetRequest
+instance Tagged TsGetRequest where
+    messageTag _ = Types.TsGetRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsGetRequest where
+    expectedResponse _ = Types.TsGetResponse
+    {-# INLINE expectedResponse #-}
+
+-- TsGetResponse
+instance Tagged TsGetResponse where
+    messageTag _ = Types.TsGetResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsGetResponse
+
+instance Exchange TsGetRequest TsGetResponse
+
+-- TsListKeysRequest
+instance Tagged TsListKeysRequest where
+    messageTag _ = Types.TsListKeysRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsListKeysRequest where
+    expectedResponse _ = Types.TsListKeysResponse
+    {-# INLINE expectedResponse #-}
+
+-- TsListKeysResponse
+instance Tagged TsListKeysResponse where
+    messageTag _ = Types.TsListKeysResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsListKeysResponse
+
+instance Exchange TsListKeysRequest TsListKeysResponse
+
+-- TsCoverageRequest
+instance Tagged TsCoverageRequest where
+    messageTag _ = Types.TsCoverageRequest
+    {-# INLINE messageTag #-}
+
+instance Request TsCoverageRequest where
+    expectedResponse _ = Types.TsCoverageResponse
+    {-# INLINE expectedResponse #-}
+
+-- TsCoverageResponse
+instance Tagged TsCoverageResponse where
+    messageTag _ = Types.TsCoverageResponse
+    {-# INLINE messageTag #-}
+
+instance Response TsCoverageResponse
+
+instance Exchange TsCoverageRequest TsCoverageResponse
+
+-- TsCoverageEntry
+instance Tagged TsCoverageEntry where
+    messageTag _ = Types.TsCoverageEntry
+    {-# INLINE messageTag #-}
+
+-- TsRange
+instance Tagged TsRange where
+    messageTag _ = Types.TsRange
+    {-# INLINE messageTag #-}
+
 putTag :: MessageTag -> Put
 putTag m = putWord8 $ message2code HM.! m
 {-# INLINE putTag #-}
@@ -351,6 +485,7 @@ message2code = HM.fromList . map swap $ messageCodes
 messageCodes :: [(Word8, MessageTag)]
 messageCodes = [
  -- From riak-2.1.3/deps/riak_pb/src/riak_pb_messages.csv
+ -- https://github.com/basho/riak_pb/blob/develop/src/riak_pb_messages.csv
  --
  -- This is a list of all known riak messages (with appropriate
  -- message codes).  Most of them are described at
@@ -360,7 +495,7 @@ messageCodes = [
  (0, Types.ErrorResponse),
  (1, Types.PingRequest),
  (2, Types.PingResponse),
- (3, Types.GetClientIDResponse),
+ (3, Types.GetClientIDRequest),
  (4, Types.GetClientIDResponse),
  (5, Types.SetClientIDRequest),
  (6, Types.SetClientIDResponse),
@@ -387,28 +522,46 @@ messageCodes = [
  (27, Types.SearchQueryRequest),
  (28, Types.SearchQueryResponse),
  -- (29,ResetBucketRequest),
- -- (30,ResetBucketResp),
+ -- (30,ResetBucketResponse),
  (31, Types.GetBucketTypeRequest),
- -- (32,SetBucketTypeReq),
- -- (33,GetBucketKeyPreflistReq),
- -- (34,GetBucketKeyPreflistResp),
- -- (40,CSBucketReq),
- -- (41,CSBucketResp),
- -- (50,CounterUpdateReq),
- -- (51,CounterUpdateResp),
- -- (52,CounterGetReq),
- -- (53,CounterGetResp),
+ -- (32,SetBucketTypeRequest),
+ -- (33,GetBucketKeyPreflistRequest),
+ -- (34,GetBucketKeyPreflistResponse),
+ -- (40,CSBucketRequest),
+ -- (41,CSBucketResponse),
+ -- (42,IndexBodyResponse),
+ -- (50,CounterUpdateRequest),
+ -- (51,CounterUpdateResponse),
+ -- (52,CounterGetRequest),
+ -- (53,CounterGetResponse),
  (54, Types.YokozunaIndexGetRequest),
  (55, Types.YokozunaIndexGetResponse),
  (56, Types.YokozunaIndexPutRequest),
  (57, Types.YokozunaIndexDeleteRequest),
- -- (58,YokozunaSchemaGetReq),
- -- (59,YokozunaSchemaGetResp),
- -- (60,YokozunaSchemaPutReq),
+ -- (58,YokozunaSchemaGetRequest),
+ -- (59,YokozunaSchemaGetResponse),
+ -- (60,YokozunaSchemaPutRequest),
+ -- (70, Types.CoverageRequest),
+ -- (71, Types.CoverageResponse),
  (80, Types.DtFetchRequest),
  (81, Types.DtFetchResponse),
  (82, Types.DtUpdateRequest),
- (83, Types.DtUpdateResponse)
+ (83, Types.DtUpdateResponse),
+ (90, Types.TsQueryRequest),
+ (91, Types.TsQueryResponse),
+ (92, Types.TsPutRequest),
+ (93, Types.TsPutResponse),
+ (94, Types.TsDeleteRequest),
+ (95, Types.TsDeleteResponse),
+ (96, Types.TsGetRequest),
+ (97, Types.TsGetResponse),
+ (98, Types.TsListKeysRequest),
+ (99, Types.TsListKeysResponse),
+ (100, Types.TsCoverageRequest),
+ (101, Types.TsCoverageResponse),
+ (102, Types.TsCoverageEntry),
+ (103, Types.TsRange)
+ -- (104, Types.TsTtbMsg)
  -- (253,RpbAuthReq),
  -- (254,RpbAuthResp),
  -- (255,RpbStartTls)
