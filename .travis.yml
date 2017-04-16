@@ -8,7 +8,7 @@ before_install:
   - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
   - ulimit -n 4096
   # riak
-  - travis_retry curl -s https://packagecloud.io/install/repositories/basho/riak-ts/script.deb.sh | sudo bash
+  - travis_retry curl -s https://packagecloud.io/install/repositories/basho/riak-ts/script.deb.sh | bash
   - apt-get install riak-ts=1.5.2-1
   - sed -r --in-place -e 's/^(search) = .*/\1 = on/' /etc/riak/riak.conf
   - riak start
